@@ -7,6 +7,10 @@ using UnityEngine.UI;
 public class buttonController : MonoBehaviour
 {
     GameObject dialog2;
+
+    // to the git readers. This is set to SeralizeField because I can't use the find gameobject
+    // because I have an animation that at the begging it sets the active status to false
+    [SerializeField] GameObject Button_1_Holder;
     GameObject Button_2_Holder;
     TextMeshProUGUI dialog2_text;
     Animator test_animation;
@@ -31,12 +35,10 @@ public class buttonController : MonoBehaviour
     }
 
     public void Button_1_Selected( ) {
-        GameObject gameobject = GameObject.Find("Button").gameObject;
-        Destroy( gameobject );
-        GameObject gameobject2 = GameObject.Find("Button (1)").gameObject;
-        Destroy(gameobject2);
+        Destroy(Button_1_Holder);
         Debug.Log("Button Clicked");
-
+        GameObject dialog1 = GameObject.Find("Dialog1");
+        Destroy(dialog1);
         Button_2_Holder.SetActive(true);
         dialog2.SetActive(true);
 
@@ -44,7 +46,8 @@ public class buttonController : MonoBehaviour
     }
 
     public void Button_2_Holder_Button_1( ) {
-        Button_2_Holder.SetActive(false);
+        //Button_1_Holder.SetActive(false);
+        Destroy(Button_2_Holder);
         dialog2_text.text = "Great! Follow me!";
 
         test_animation.SetBool("is_pressed", true);
